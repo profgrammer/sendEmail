@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to event registration</title>
+</head>
+<body>
+    <h3>Event registration form</h3>
+    <form action="">
+        Name: <input type="text" name="" id="name"> <br><br>
+        Email: <input type="email" name="" id="email"> <br><br>
+
+        <button type="button" id="submit">Submit</button>
+    </form>
+
+    <script>
+        document.querySelector('#submit').addEventListener('click', () => {
+            var name = document.querySelector('#name').value, email = document.querySelector('#email').value;
+            console.log(email, name)
+            fetch('/register', {
+                method: 'post',
+                headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name
+                })
+            }).then(res => res.json()).then(json => {console.log(json); alert('check your email')});
+        })
+        
+    </script>
+</body>
+</html>
